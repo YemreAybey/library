@@ -9,7 +9,7 @@
 
 ## Getting started
 
-To get started with the app, clone the 
+To get started with the app, clone the repo
 
 ```
 git clone => The SSH key or URL <=
