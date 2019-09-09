@@ -17,3 +17,17 @@ let books = [book1, book2, book3];
 function addBook(book) {
     books.push(book);
 }
+
+let render = function(template, node){
+    node.innerHTML += template;
+}
+
+for (let book of books){
+    let template = `
+    <td>${book.title}</td>\
+    <td>${book.author}</td>\
+    <td>${book.pages}</td>\
+    <td>${book.isread}</td>\
+  `;
+    render(template, document.querySelector('#books'));
+}
