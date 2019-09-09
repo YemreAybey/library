@@ -5,9 +5,9 @@ function Book(title, author, isRead, pages){
     this.pages = pages;
 }
 
-let book1 =new Book("Yemre", "Yemre", false, 255);
-let book2 = new Book("Afani", "Afani", false, 122);
-let book3 =new Book("Ebuka", "Ebuka", false, 245);
+let book1 =new Book("Yemre", "Yemre", "Read", 255);
+let book2 = new Book("Afani", "Afani", "Read", 122);
+let book3 =new Book("Ebuka", "Ebuka", "Read", 245);
 
 let books = [book1, book2, book3];
 
@@ -31,7 +31,7 @@ let render = function(node, book){
 <td>${book.title}</td>\
 <td>${book.author}</td>\
 <td>${book.pages}</td>\
-<td><button type="button" id="${books.indexOf(book)}" class="btn btn-primary read" data-text-swap="UNREAD">READ</button></td>\
+<td><button type="button" id="${books.indexOf(book)}" class="btn btn-primary read" data-text-swap="${book.isread}">${book.isread}</button></td>\
 <td><button type="button" id="${books.indexOf(book)}" class="btn btn-danger delete">DELETE</button></td>\
 `;
     node.innerHTML += template;
@@ -40,11 +40,12 @@ let render = function(node, book){
 
     let readBtn = document.querySelectorAll("button.read");
     readBtn.forEach(btn => btn.addEventListener('click', function(){
-        if(btn.getAttribute("data-text-swap") == btn.innerHTML){
-            btn.innerHTML = "READ"
+        if(book.isread == "Read"){
+            book.isread = "Unread";
+            btn.innerHTML = `${book.isread}`;
         }else{
-            btn.setAttribute("READ", btn.innerHTML);
-            btn.innerHTML = btn.getAttribute("data-text-swap");
+            book.isread = "Read";
+           btn.innerHTML = `${book.isread}`;
         }
     }));
 }
@@ -72,9 +73,9 @@ closeButton.addEventListener('click', openForm)
 function addAndRenderBook() {
     let bookParts = document.querySelectorAll("input[type='text']");
     let radio = document.getElementById("true");
-    let isread = false;
+    let isread = "Read";
     if (radio.checked) {
-        isread = true;
+        isread = "Unread";
     }
 
     let book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value );
