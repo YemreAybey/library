@@ -18,16 +18,52 @@ function addBook(book) {
     books.push(book);
 }
 
-let render = function(template, node){
+let render = function(node, book){
+    let template = `
+<td>${book.title}</td>\
+<td>${book.author}</td>\
+<td>${book.pages}</td>\
+<td>${book.isread}</td>\
+`;
     node.innerHTML += template;
 }
 
-for (let book of books){
-    let template = `
-    <td>${book.title}</td>\
-    <td>${book.author}</td>\
-    <td>${book.pages}</td>\
-    <td>${book.isread}</td>\
-  `;
-    render(template, document.querySelector('#books'));
+    for (let book of books){
+      
+        render(document.querySelector('#books'), book);
+    }
+
+
+let openForm = function() {
+    let formArea = document.getElementById("formarea");
+    formArea.classList.toggle("d-none");
 }
+let addBtn = document.querySelector("button.addButton");
+addBtn.addEventListener('click', openForm);
+
+
+let saveButton = document.querySelector("button.save");
+let closeButton = document.querySelector("button.cancel");
+closeButton.addEventListener('click', openForm)
+
+function addAndRenderBook() {
+    let bookParts = document.querySelectorAll("input[type='text']");
+    let radio = document.getElementById("true");
+    let isread = false;
+    if (radio.checked) {
+        isread = true;
+    }
+
+    let book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value );
+    for (i in bookParts) {
+        if (bookParts[i].value == "" ){
+            alert("Please Fill The Form Properly");
+            return;
+        }
+    }
+    addBook(book);
+    render(document.querySelector('#books'), book);   
+}
+saveButton.addEventListener('click', addAndRenderBook);
+
+
