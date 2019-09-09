@@ -20,17 +20,33 @@ function addBook(book) {
 function deleteItem(btn){
     btn.path[0].parentNode.parentNode.remove();
 }
+
+function readItem(){
+    alert("hello")
+}
+
+
 let render = function(node, book){
     let template = `
 <td>${book.title}</td>\
 <td>${book.author}</td>\
 <td>${book.pages}</td>\
-<td>${book.isread}</td>\
+<td><button type="button" id="${books.indexOf(book)}" class="btn btn-primary read" data-text-swap="UNREAD">READ</button></td>\
 <td><button type="button" id="${books.indexOf(book)}" class="btn btn-danger delete">DELETE</button></td>\
 `;
     node.innerHTML += template;
     let dButton =   document.querySelectorAll("button.delete");
     dButton.forEach(btn => btn.addEventListener('click', deleteItem, btn));
+
+    let readBtn = document.querySelectorAll("button.read");
+    readBtn.forEach(btn => btn.addEventListener('click', function(){
+        if(btn.getAttribute("data-text-swap") == btn.innerHTML){
+            btn.innerHTML = "READ"
+        }else{
+            btn.setAttribute("READ", btn.innerHTML);
+            btn.innerHTML = btn.getAttribute("data-text-swap");
+        }
+    }));
 }
 
  
