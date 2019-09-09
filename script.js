@@ -17,8 +17,8 @@ let books = [book1, book2, book3];
 function addBook(book) {
     books.push(book);
 }
-function deleteItem(){
-    alert('deleted');
+function deleteItem(btn){
+    btn.path[0].parentNode.parentNode.remove();
 }
 let render = function(node, book){
     let template = `
@@ -26,9 +26,11 @@ let render = function(node, book){
 <td>${book.author}</td>\
 <td>${book.pages}</td>\
 <td>${book.isread}</td>\
-<td><button type="button" class="btn btn-danger delete">DELETE</button></td>\
+<td><button type="button" id="${books.indexOf(book)}" class="btn btn-danger delete">DELETE</button></td>\
 `;
     node.innerHTML += template;
+    let dButton =   document.querySelectorAll("button.delete");
+    dButton.forEach(btn => btn.addEventListener('click', deleteItem, btn));
 }
 
  
@@ -37,8 +39,7 @@ let render = function(node, book){
       
         render(document.querySelector('#books'), book);
     }
-    let dButton =   document.querySelectorAll("button.delete");
-    dButton.forEach(btn => btn.addEventListener('click', deleteItem));
+    
 
 let openForm = function() {
     let formArea = document.getElementById("formarea");
