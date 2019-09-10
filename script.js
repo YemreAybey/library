@@ -9,6 +9,7 @@ const book1 =new Book("Yemre", "Yemre", false, 255);
 const book2 = new Book("Afani", "Afani", false, 122);
 const book3 =new Book("Ebuka", "Ebuka", false, 245);
 
+
 let books = [book1, book2, book3];
 
 function addBook(book) {
@@ -23,7 +24,7 @@ let render = function(node, book){
     <td>${book.title}</td>\
     <td>${book.author}</td>\
     <td>${book.pages}</td>\
-    <td><button type="button" id="${books.indexOf(book)}" class="btn btn-primary read" data-text-swap="UNREAD">READ</button></td>\
+    <td><button type="button" id="${books.indexOf(book)}" class="btn btn-primary read" data-text-swap="${book.isread}">${book.isread}</button></td>\
     <td><button type="button" id="${books.indexOf(book)}" class="btn btn-danger delete">DELETE</button></td>\
     `;
     node.innerHTML += template;
@@ -32,28 +33,26 @@ let render = function(node, book){
 
     let readBtn = document.querySelectorAll("button.read");
     readBtn.forEach(btn => btn.addEventListener('click', function(){
-        if(btn.getAttribute("data-text-swap") == btn.innerHTML){
-            btn.innerHTML = "READ"
+        if(book.isread == "Read"){
+            book.isread = "Unread";
+            btn.innerHTML = `${book.isread}`;
         }else{
-            btn.setAttribute("READ", btn.innerHTML);
-            btn.innerHTML = btn.getAttribute("data-text-swap");
+            book.isread = "Read";
+           btn.innerHTML = `${book.isread}`;
         }
     }));
 }
-
 
 for (let book of books){
     render(document.querySelector('#books'), book);
 }
     
-
 let openForm = function() {
     let formArea = document.getElementById("formarea");
     formArea.classList.toggle("d-none");
 }
 let addBtn = document.querySelector("button.addButton");
 addBtn.addEventListener('click', openForm);
-
 
 let saveButton = document.querySelector("button.save");
 let closeButton = document.querySelector("button.cancel");
@@ -62,9 +61,9 @@ closeButton.addEventListener('click', openForm)
 function addAndRenderBook() {
     let bookParts = document.querySelectorAll("input[type='text']");
     let radio = document.getElementById("true");
-    let isread = false;
+    let isread = "Read";
     if (radio.checked) {
-        isread = "READ";
+        isread = "Unread";
     }
 
     let book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value );
