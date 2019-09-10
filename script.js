@@ -9,14 +9,19 @@ const book1 =new Book("Yemre", "Yemre", "Unread", 255);
 const book2 = new Book("Afani", "Afani", "Unread", 122);
 const book3 =new Book("Ebuka", "Ebuka", "Unread", 245);
 
-
-let books = [book1, book2, book3];
+const books = [book1, book2, book3];
 
 function addBook(book) {
     books.push(book);
 }
-function deleteItem(event){
-    event.path[0].parentNode.parentNode.remove();
+
+function removeBook(book){
+    books.splice(book, 1);
+}
+
+function deleteItem(book){
+    book.target.parentNode.parentNode.remove();
+    removeBook(book.target.id)
 }
 
 let render = function(node, book){
