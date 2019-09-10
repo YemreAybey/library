@@ -21,7 +21,7 @@ function removeBook(book){
 
 function deleteItem(book){
   book.target.parentNode.parentNode.remove();
-  removeBook(book.target.id)
+  removeBook(book.target.id);
 }
 
 const render = function(node, book){
@@ -41,42 +41,43 @@ const render = function(node, book){
   if(book.isread == "Read"){
       book.isread = "Unread";
       btn.innerHTML = `${book.isread}`;
-  }else{
+  }
+  else {
       book.isread = "Read";
       btn.innerHTML = `${book.isread}`;
   }
   }));
-}
+};
 
 for (let book of books){
   render(document.querySelector('#books'), book);
 }
     
 const openForm = function() {
-  let formArea = document.getElementById("formarea");
+  const formArea = document.getElementById("formarea");
   formArea.classList.toggle("d-none");
-}
+};
 const addBtn = document.querySelector("button.addButton");
 addBtn.addEventListener('click', openForm);
 
 const saveButton = document.querySelector("button.save");
 const closeButton = document.querySelector("button.cancel");
-closeButton.addEventListener('click', openForm)
+closeButton.addEventListener('click', openForm);
 
 function addAndRenderBook() {
   const bookParts = document.querySelectorAll("input[type='text']");
   const radio = document.getElementById("true");
   const isread = "Read";
   if (radio.checked) {
-      isread = "Unread";
+    isread = "Unread";
   }
 
 const book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value );
 for (let i in bookParts) {
-    if (bookParts[i].value == "" ){
-        alert("Please Fill The Form Properly");
-        return;
-    }
+  if (bookParts[i].value == "" ){
+    alert("Please Fill The Form Properly");
+    return;
+  }
 }
   addBook(book);
   render(document.querySelector('#books'), book);   
