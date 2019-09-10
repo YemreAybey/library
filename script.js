@@ -5,9 +5,9 @@ function Book(title, author, isRead, pages){
     this.pages = pages;
 }
 
-const book1 =new Book("Yemre", "Yemre", false, 255);
-const book2 = new Book("Afani", "Afani", false, 122);
-const book3 =new Book("Ebuka", "Ebuka", false, 245);
+const book1 =new Book("Yemre", "Yemre", "Unread", 255);
+const book2 = new Book("Afani", "Afani", "Unread", 122);
+const book3 =new Book("Ebuka", "Ebuka", "Unread", 245);
 
 
 let books = [book1, book2, book3];
@@ -15,8 +15,8 @@ let books = [book1, book2, book3];
 function addBook(book) {
     books.push(book);
 }
-function deleteItem(btn){
-    btn.path[0].parentNode.parentNode.remove();
+function deleteItem(event){
+    event.path[0].parentNode.parentNode.remove();
 }
 
 let render = function(node, book){
@@ -29,7 +29,7 @@ let render = function(node, book){
     `;
     node.innerHTML += template;
     let dButton =   document.querySelectorAll("button.delete");
-    dButton.forEach(btn => btn.addEventListener('click', deleteItem, btn));
+    dButton.forEach(btn => btn.addEventListener('click', deleteItem));
 
     let readBtn = document.querySelectorAll("button.read");
     readBtn.forEach(btn => btn.addEventListener('click', function(){
