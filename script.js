@@ -1,3 +1,4 @@
+/* eslint-env browser */
 function Book(title, author, isRead, pages) {
   this.title = title;
   this.author = author;
