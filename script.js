@@ -50,8 +50,8 @@ const render = (node, book) => {
   }));
 };
 
-for (const book of books) {
-  render(document.querySelector('#books'), book);
+for (let i = 0; i < books.length; i++) {
+  render(document.querySelector('#books'), books[i]);
 }
 const openForm = () => {
   const formArea = document.getElementById('formarea');
@@ -71,11 +71,11 @@ function addAndRenderBook() {
   if (radio.checked) {
     isread = 'Unread';
   }
-
+const customAlert = string => alert(string);
   const book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value);
-  for (const i of bookParts) {
-    if (i.value === '') {
-      alert('Please Fill The Form Properly');
+  for (let i = 0; i < bookParts.length; i++) {
+    if (bookParts[i].value === '') {
+      customAlert('Please Fill The Form Properly');
       return;
     }
   }
