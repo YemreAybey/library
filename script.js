@@ -73,7 +73,7 @@ function addAndRenderBook() {
   const book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value);
   for (let i = 0; i < bookParts.length; i += 1) {
     if (bookParts[i].value === '') {
-      Alert('Please Fill The Form Properly'); // eslint-disable-line no-alert
+      alert('Please Fill The Form Properly'); // eslint-disable-line no-alert
       return;
     }
   }
