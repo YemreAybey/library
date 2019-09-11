@@ -34,10 +34,10 @@ const render = (node, book) => {
   `;
   node.innerHTML += template;
   const dButton = document.querySelectorAll('button.delete');
-  dButton.forEach (btn => btn.addEventListener('click', deleteItem));
+  dButton.forEach(btn => btn.addEventListener('click', deleteItem));
 
   const readBtn = document.querySelectorAll('button.read');
-  readBtn.forEach (btn => btn.addEventListener('click', () => {
+  readBtn.forEach(btn => btn.addEventListener('click', () => {
     if (book.isread === 'Read') {
       book.isread = 'Unread';
       btn.innerHTML = `${book.isread}`;
@@ -49,9 +49,9 @@ const render = (node, book) => {
   }));
 };
 
-for (let book of books) {
+for (const book of books) {
   render(document.querySelector('#books'), book);
-}  
+}
 const openForm = () => {
   const formArea = document.getElementById('formarea');
   formArea.classList.toggle('d-none');
@@ -72,13 +72,13 @@ function addAndRenderBook() {
   }
 
   const book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value);
-  for (let i of bookParts) {
+  for (const i of bookParts) {
     if (i.value === '') {
       alert('Please Fill The Form Properly');
       return;
     }
   }
   addBook(book);
-  render(document.querySelector('#books'), book);   
+  render(document.querySelector('#books'), book);
 }
 saveButton.addEventListener('click', addAndRenderBook);
