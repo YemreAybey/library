@@ -42,15 +42,14 @@ const render = (node, book) => {
     if (book.isread === 'Read') {
       book.isread = 'Unread';
       btn.innerHTML = `${book.isread}`;
-    }
-    else {
+    } else {
       book.isread = 'Read';
       btn.innerHTML = `${book.isread}`;
     }
   }));
 };
 
-for (let i = 0; i < books.length; i++) {
+for (let i = 0; i < books.length; i += 1) {
   render(document.querySelector('#books'), books[i]);
 }
 const openForm = () => {
@@ -71,11 +70,10 @@ function addAndRenderBook() {
   if (radio.checked) {
     isread = 'Unread';
   }
-const customAlert = string => alert(string);
   const book = new Book(bookParts[0].value, bookParts[1].value, isread, bookParts[2].value);
-  for (let i = 0; i < bookParts.length; i++) {
+  for (let i = 0; i < bookParts.length; i += 1) {
     if (bookParts[i].value === '') {
-      customAlert('Please Fill The Form Properly');
+      Alert('Please Fill The Form Properly'); // eslint-disable-line no-alert
       return;
     }
   }
